@@ -15,7 +15,9 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
 public class FoyerServiceImplTest {
+
     @InjectMocks
     FoyerServiceImpl foyerService;
 
@@ -56,6 +58,15 @@ public class FoyerServiceImplTest {
     }
 
     @Test
+    public void testRetrieveFoyer_NotFound() {
+        when(foyerRepository.findById(1L)).thenReturn(Optional.empty());
+
+        Foyer foundFoyer = foyerService.retrieveFoyer(1L);
+        assertNull(foundFoyer); // Vérifie que la méthode retourne null ou un comportement attendu
+        verify(foyerRepository, times(1)).findById(1L);
+    }
+
+    @Test
     public void testAddFoyer() {
         when(foyerRepository.save(foyer)).thenReturn(foyer);
 
@@ -63,6 +74,14 @@ public class FoyerServiceImplTest {
         assertNotNull(addedFoyer);
         assertEquals(foyer.getNomFoyer(), addedFoyer.getNomFoyer());
         verify(foyerRepository, times(1)).save(foyer);
+    }
+
+    @Test
+    public void testAddFoyer_Null() {
+        Foyer nullFoyer = null;
+        assertThrows(IllegalArgumentException.class, () -> {
+            foyerService.addFoyer(nullFoyer); // Supposons que vous lanciez une exception pour une entrée nulle
+        });
     }
 
     @Test
@@ -76,10 +95,38 @@ public class FoyerServiceImplTest {
     }
 
     @Test
+    public void testModifyFoyer_NotFound() {
+        when(foyerRepository.findById(1L)).thenReturn(Optional.empty());
+
+        Foyer modifiedFoyer = foyerService.modifyFoyer(foyer);
+        assertNull(modifiedFoyer); // Vérifiez le comportement attendu
+        verify(foyerRepository, times(1)).findById(1L);
+    }
+
+    @Test
     public void testRemoveFoyer() {
         doNothing().when(foyerRepository).deleteById(1L);
 
         foyerService.removeFoyer(1L);
         verify(foyerRepository, times(1)).deleteById(1L);
+    }
+
+    @Test
+    public void testRemoveFoyer_NotFound() {
+        // Si votre service a une logique qui vérifie d'abord l'existence
+        doNothing().when(foyerRepository).deleteById(1L);
+
+        foyerService.removeFoyer(1L);
+        verify(foyerRepository, times(1)).deleteById(1L);
+    }
+
+    @Test
+    public void testAddFoyer_Exception() {
+        when(foyerRepository.save(any(Foyer.class))).thenThrow(new RuntimeException("Database error"));
+
+        assertThrows(RuntimeException.class, () -> {
+            foyerService.addFoyer(foyer);
+        });
+        verify(foyerRepository, times(1)).save(foyer);
     }
 }

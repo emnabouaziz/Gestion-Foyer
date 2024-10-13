@@ -18,6 +18,11 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+
+@ExtendWith(MockitoExtension.class)
 
 class EtudiantServiceImplTest {
     @InjectMocks
@@ -30,7 +35,7 @@ class EtudiantServiceImplTest {
 
     @BeforeEach
     public void setUp() {
-        reservation = new Reservation("1", new Date(), true);
+        reservation = new Reservation("1", new Date(), true, null);
 
         Set<Reservation> reservations = new HashSet<>();
         reservations.add(reservation);

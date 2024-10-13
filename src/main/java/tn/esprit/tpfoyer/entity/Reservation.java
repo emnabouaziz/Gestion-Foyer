@@ -23,6 +23,11 @@ public class Reservation {
 
     Date anneeUniversitaire;
     boolean estValide;
+    public Reservation(String idReservation, Date anneeUniversitaire, boolean estValide) {
+        this.idReservation = idReservation;
+        this.anneeUniversitaire = anneeUniversitaire;
+        this.estValide = estValide;
+    }
 
 
 

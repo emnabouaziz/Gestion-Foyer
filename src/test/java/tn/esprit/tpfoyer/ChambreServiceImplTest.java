@@ -21,16 +21,12 @@ import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 class ChambreServiceImplTest {
-
     @Mock
     ChambreRepository chambreRepository;
-
     @InjectMocks
     ChambreServiceImpl chambreService;
-
     Chambre chambre;
     Bloc bloc;
-
     List<Chambre> listChambres;
 
     @BeforeEach
@@ -38,7 +34,6 @@ class ChambreServiceImplTest {
         bloc = new Bloc();
         bloc.setIdBloc(1L);
         bloc.setNomBloc("Bloc A");
-
         chambre = new Chambre();
         chambre.setIdChambre(1L);
         chambre.setNumeroChambre(101);
@@ -64,46 +59,31 @@ class ChambreServiceImplTest {
 
     @Test
     void testRetrieveAllChambres() {
-        // Configuration du mock pour la méthode findAll()
         when(chambreRepository.findAll()).thenReturn(listChambres);
-
-        // Exécution de la méthode à tester
         List<Chambre> chambres = chambreService.retrieveAllChambres();
-
-        // Vérifications
         assertNotNull(chambres);
         assertEquals(1, chambres.size());
         assertEquals(101, chambres.get(0).getNumeroChambre());
-
-        // Vérifier que findAll() a bien été appelée
         verify(chambreRepository, times(1)).findAll();
     }
 
     @Test
     void testAddChambre() {
-        // Configuration du mock pour la méthode save()
         when(chambreRepository.save(any(Chambre.class))).thenReturn(chambre);
-
-        // Exécution de la méthode à tester
         Chambre addedChambre = chambreService.addChambre(chambre);
 
-        // Vérifications
         assertNotNull(addedChambre);
         assertEquals(101, addedChambre.getNumeroChambre());
 
-        // Vérifier que save() a bien été appelée
         verify(chambreRepository, times(1)).save(chambre);
     }
 
     @Test
     void testModifyChambre() {
-        // Simuler la méthode save() pour modifier la chambre
         when(chambreRepository.save(any(Chambre.class))).thenReturn(chambre);
 
-        // Exécution de la méthode à tester
         Chambre modifiedChambre = chambreService.modifyChambre(chambre);
 
-        // Vérifications
         assertNotNull(modifiedChambre);
         assertEquals(101, modifiedChambre.getNumeroChambre());
 

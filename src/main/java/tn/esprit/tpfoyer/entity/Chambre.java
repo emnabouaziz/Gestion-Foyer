@@ -33,5 +33,5 @@ public class Chambre {
 
     @ManyToOne(cascade = CascadeType.ALL)
     Bloc bloc;
-//hello
+
 }

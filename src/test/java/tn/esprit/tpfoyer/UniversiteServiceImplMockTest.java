@@ -87,7 +87,7 @@ public class UniversiteServiceImplMockTest {
         Universite result = universiteService.modifyUniversite(updatedUniversite);
 
         assertEquals("Université Modifiée", result.getNomUniversite());
-        assertEquals("Foyer ESPRIT", result.getFoyer().getNomFoyer()); // Assuming you want to keep the original foyer
+        assertEquals("Foyer ESPRIT", result.getFoyer().getNomFoyer());
         verify(universiteRepository, times(1)).save(updatedUniversite);
     }
 

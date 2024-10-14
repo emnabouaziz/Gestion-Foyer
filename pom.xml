@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.4</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>tn.esprit</groupId>
     <artifactId>tp-foyer</artifactId>
@@ -43,7 +43,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -67,7 +66,6 @@
                 </configuration>
             </plugin>
 
-            <!-- JaCoCo Maven Plugin for code coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -78,7 +76,6 @@
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-                    <!-- Post-test report generation -->
                     <execution>
                         <id>report</id>
                         <phase>test</phase>
@@ -91,5 +88,12 @@
 
         </plugins>
     </build>
+    <distributionManagement>
+        <repository>
+            <id>deploymentRepo</id>
+            <name>Nexus Repository</name>
+            <url>http://localhost:8081/repository/maven-releases/</url>
+        </repository>
+    </distributionManagement>
 
 </project>

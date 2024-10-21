@@ -18,6 +18,7 @@
     </properties>
     <dependencies>
 
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -66,11 +67,22 @@
                 <version>4.0.0</version>
                 <scope>test</scope>
             </dependency>
-
-
-
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
+    <!-- Deploy to Nexus -->
+    <distributionManagement>
+        <repository>
+            <id>deploymentRepo</id>
+            <name>Nexus Repository</name>
+            <url>http://192.168.33.10:8081/repository/maven-releases/</url>
+        </repository>
+    </distributionManagement>
+
 
     <build>
         <plugins>
@@ -104,9 +116,12 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
+
                 </executions>
+
             </plugin>
         </plugins>
+
     </build>
 
 </project>

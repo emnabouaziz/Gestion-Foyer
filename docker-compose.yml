@@ -5,8 +5,8 @@ services:
     image: mysql:8.3.0
     restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD=
-      - MYSQL_DATABASE=timesheet_db
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes 
+      - MYSQL_DATABASE=db
     ports:
       - 3306:3306
     volumes:
@@ -15,7 +15,6 @@ services:
     depends_on:
       - mysqldb
     image: mohamedhmaidi/tp-foyer:1.0.0
-    #build : ./
     restart: on-failure
     ports:
       - 8089:8089

@@ -6,13 +6,12 @@ services:
     restart: unless-stopped
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_DATABASE=tpfoyer_db
+      - MYSQL_DATABASE=db
     ports:
       - 3306:3306
     volumes:
       - db:/var/lib/mysql
-
-  app-tpfoyer:
+  app-timesheet:
     depends_on:
       - mysqldb
     image: motrabelsi10/tp-foyer:1.0.0
@@ -21,10 +20,11 @@ services:
       - 8089:8089
     environment:
       SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/tpfoyer_db?createDatabaseIfNotExist=true",
-        "spring.datasource.username" : "root",
-        "spring.datasource.password" : "",
-        "spring.jpa.hibernate.ddl-auto" : "update"
+        "spring.datasource.url": "jdbc:mysql://mysqldb:3306/db?createDatabaseIfNotExist=true",
+        "spring.datasource.username": "root",
+        "spring.datasource.password": null,
+        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL8Dialect",
+        "spring.jpa.hibernate.ddl-auto": "update"
       }'
     stdin_open: true
     tty: true

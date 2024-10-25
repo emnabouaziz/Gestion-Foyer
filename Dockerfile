@@ -1,11 +1,4 @@
-FROM openjdk:17
-
-# Exposez le port sur lequel votre application Java écoute
+FROM openjdk:17-jdk-alpine
 EXPOSE 8089
-
-# Définissez le répertoire de travail dans le conteneur
-WORKDIR /app
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-# Commande d'entrée pour exécuter l'application Java
-CMD ["java", "-jar", "app.jar"]
+ADD target/tp-foyer-5.0.0.jar tp-foyer-5.0.0.jar
+ENTRYPOINT ["java","-jar","/tp-foyer-5.0.0.jar"]

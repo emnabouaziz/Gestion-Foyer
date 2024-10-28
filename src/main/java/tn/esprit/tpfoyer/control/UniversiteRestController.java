@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/universite")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UniversiteRestController {
 
     IUniversiteService universiteService;

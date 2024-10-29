@@ -16,7 +16,7 @@ services:
   app-timesheet:
     depends_on:
       - mysqldb
-    image: motrabelsi10/tp-foyer:1.0.0
+    image: motrabelsi10/tp-foyer:1.0.0  # Remplacez par votre image backend
     restart: on-failure
     ports:
       - 8089:8089
@@ -30,6 +30,14 @@ services:
       }'
     stdin_open: true
     tty: true
+
+  frontend-chambres:
+    image: motrabelsi10/frontend-chambres:latest  # Image Angular
+    restart: unless-stopped
+    ports:
+      - 80:80  # Port sur lequel votre frontend sera accessible
+    depends_on:
+      - app-timesheet  # Assurez-vous que l'application backend est prête avant le frontend
 
 volumes:
   db:

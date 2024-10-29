@@ -8,6 +8,7 @@ import tn.esprit.tpfoyer.service.IUniversiteService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @AllArgsConstructor
 @RequestMapping("/universite")
 public class UniversiteRestController {

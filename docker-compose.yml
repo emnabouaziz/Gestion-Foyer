@@ -32,12 +32,12 @@ services:
     tty: true
 
   frontend-chambres:
-    image: motrabelsi10/frontend-chambres:latest  # Image Angular
-    restart: unless-stopped
+    image: motrabelsi10/devops-front:1.0.0
+    restart: on-failure
     ports:
-      - 80:80  # Port sur lequel votre frontend sera accessible
+      - 80:80
     depends_on:
-      - app-timesheet  # Assurez-vous que l'application backend est prête avant le frontend
+      - app-timesheet
 
 volumes:
   db:

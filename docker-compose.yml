@@ -11,6 +11,7 @@ services:
       - 3306:3306
     volumes:
       - db:/var/lib/mysql
+
   app-timesheet:
     depends_on:
       - mysqldb
@@ -28,6 +29,14 @@ services:
       }'
     stdin_open: true
     tty: true
+
+  universiteapp:
+    image: mohamedhmaidi/universiteapp:1.0.0
+    restart: on-failure
+    ports:
+      - 80:80
+    depends_on:
+      - app-timesheet
 
 volumes:
   db:

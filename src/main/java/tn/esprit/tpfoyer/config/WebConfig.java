@@ -16,8 +16,8 @@ public class WebConfig {
                 registry.addMapping("/**")
                         .allowedOriginPatterns("http://192.168.50.4:80")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedHeaders("*")
-                        .allowCredentials(false);
+                        .allowedHeaders("*");
+
             }
         };
     }

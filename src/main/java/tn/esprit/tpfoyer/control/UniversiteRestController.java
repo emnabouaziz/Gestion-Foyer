@@ -10,7 +10,6 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/universite")
-@CrossOrigin(origins = "http://192.168.50.4")
 public class UniversiteRestController {
 
     IUniversiteService universiteService;

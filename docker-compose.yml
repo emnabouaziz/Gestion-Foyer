@@ -32,7 +32,7 @@ services:
     tty: true
 
   frontend-chambres:
-    image: motrabelsi10/frontend-devops:2.0.0
+    image: motrabelsi10/devops-chambres-front:1.0
     restart: on-failure
     ports:
       - 80:80

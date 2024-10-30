@@ -16,7 +16,7 @@ services:
   app-foyer:
     depends_on:
       - mysqldb
-    image: emnabouaziz/tp-foyer:2.0.0
+    image: emnabouaziz/tp-foyer:3.0.0
     restart: on-failure
     ports:
       - 8089:8089

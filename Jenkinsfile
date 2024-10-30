@@ -4,7 +4,7 @@ pipeline {
     environment {
         SONARQUBE_TOKEN = 'sqa_e4c3910c0ac4bb36fc821780e8553f35b2d31366'
         SONARQUBE_URL = 'http://localhost:9000'
-        DOCKER_IMAGE = 'emnabouaziz/tp-foyer:2.0.0'
+        DOCKER_IMAGE = 'emnabouaziz/tp-foyer:3.0.0'
         BACKEND_URL = 'http://localhost:8089'
     }
 

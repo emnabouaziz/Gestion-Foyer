@@ -71,6 +71,13 @@ pipeline {
                 """
             }
         }
+        stage('Clean Up Existing Containers') {
+            steps {
+                script {
+                    sh 'docker-compose down -v' // Stops containers and removes volumes
+                }
+            }
+        }
 
         stage('Docker Compose') {
             steps {

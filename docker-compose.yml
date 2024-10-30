@@ -8,15 +8,22 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_ALLOW_EMPTY_PASSWORD=no
       - MYSQL_DATABASE=db
+      - MYSQL_INNODB_FORCE_RECOVERY=1
     ports:
       - 3306:3306
     volumes:
       - db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -p$MYSQL_ROOT_PASSWORD || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
   app-foyer:
     depends_on:
       - mysqldb
     image: emnabouaziz/tp-foyer:1.0.0
-    #build : ./
     restart: on-failure
     ports:
       - 8089:8089
@@ -30,6 +37,12 @@ services:
       }'
     stdin_open: true
     tty: true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8089/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
 
 volumes:
-  db :
+  db:

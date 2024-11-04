@@ -9,7 +9,10 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "http://192.168.186.130")
+//@CrossOrigin(origins = "http://192.168.186.130")
+
+@CrossOrigin(origins = "${cors.allowed.origins}")
+
 @AllArgsConstructor
 @RequestMapping("/chambre")
 public class ChambreRestController {

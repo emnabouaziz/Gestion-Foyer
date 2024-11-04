@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://192.168.186.130")
 @AllArgsConstructor
 @RequestMapping("/chambre")
 public class ChambreRestController {

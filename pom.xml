@@ -57,6 +57,7 @@
 
     <build>
         <plugins>
+            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -69,6 +70,8 @@
                     </excludes>
                 </configuration>
             </plugin>
+
+            <!-- JaCoCo Maven Plugin -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -88,8 +91,28 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- OWASP Dependency-Check Maven Plugin -->
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>6.5.0</version> <!-- You can use the latest version -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal> <!-- Goal to run the security scan -->
+                        </goals>
+                        <phase>verify</phase> <!-- Runs during the verify phase of the build lifecycle -->
+                        <configuration>
+                            <format>HTML</format> <!-- Report format (HTML, XML, JSON) -->
+                            <outputDirectory>${project.build.directory}/dependency-check-report</outputDirectory> <!-- Report output directory -->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
 
     <distributionManagement>
         <repository>

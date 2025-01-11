@@ -13,12 +13,12 @@ services:
       - db:/var/lib/mysql
   app-timesheet:
     depends_on:
-      - mysqldb
-    image: maryem533/tp-foyer-5.0.0
+      - mysqldb  # Spécifie que ce service dépend de "mysqldb", donc le conteneur mysqldb sera démarré avant ce service.
+    image: riadhkhzemix/tp-foyer-5.0.0
     #build : ./
-    restart: on-failure
+    restart: on-failure  # Redémarre le conteneur uniquement si l'application échoue
     ports:
-      - 8082:8082
+      - 8082:8082 # Mappe le port 8082 de la machine hôte vers le port 8082 du conteneur, permettant d'accéder à l'application via ce port.
     environment:
       SPRING_APPLICATION_JSON: '{
         "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/timesheet_db?createDatabaseIfNotExist=true",
@@ -28,7 +28,7 @@ services:
         "spring.jpa.hibernate.ddl-auto" : "update"
       }'
     stdin_open: true
-    tty: true
+    tty: true  # Alloue un terminal pour le conteneur, ce qui permet de l'utiliser en mode interactif.
 
 volumes:
-  db :
+  db : # Crée un volume Docker nommé "db" pour stocker de manière persistante les données MySQL.
